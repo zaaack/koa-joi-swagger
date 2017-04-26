@@ -13,7 +13,7 @@ export default {
   //  the domain of the service
   //  host: 127.0.0.1:3457
   //  array of all schemes that your API supports
-  schemes: ['https', 'http'],
+  schemes: ['http', 'https'],
   //  will be prefixed to all paths
   basePath: '/api/v1',
   consumes: ['application/x-www-form-urlencoded'],

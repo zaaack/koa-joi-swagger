@@ -121,12 +121,6 @@ export default function mixedValidate(document, opts = {}) {
     }, {})
   }
   const cache = {}
-  // var data = { "foo": "1", "bar": "false" };
-  //
-  // var validate = ajv.compile(schema);
-
-  // console.log(validate(data)); // true
-  // console.log(data); // { "foo": 1, "bar": false }
   return async (ctx, next) => {
     let pathParams
     let schemaInfo = schemaInfos.find(

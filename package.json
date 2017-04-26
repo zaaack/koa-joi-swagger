@@ -36,7 +36,7 @@
     "joi-to-json-schema": "^3.0.0",
     "koa-send": "^3",
     "path-to-regexp": "^1.7.0",
-    "swagger-ui": "^3.0.6"
+    "swagger-ui": "^2"
   },
   "devDependencies": {
     "ava": "^0.18.2",
@@ -48,13 +48,13 @@
     "babel-preset-stage-0": "^6.22.0",
     "cross-env": "^3.2.4",
     "eslint": "^3.18.0",
+    "get-port": "^3.1.0",
     "koa": "^2",
     "koa-bodyparser": "3",
     "koa-dec-router": "^0.0.2",
     "nyc": "^10.2.0",
     "pre-commit": "^1.2.2",
-    "supertest": "^3.0.0",
-    "get-port": "^3.1.0"
+    "supertest": "^3.0.0"
   },
   "ava": {
     "files": [

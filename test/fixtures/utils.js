@@ -30,8 +30,8 @@ export const Err = Joi.object().json().keys({
 
 export function pageQuery(schema = Joi.object()) {
   return Joi.object().keys({
-    page: Joi.number().integer().optional().description('当前页数(starts with 1)'),
-    limit: Joi.number().integer().optional().description('每页条数'),
+    page: Joi.number().integer().optional().default(1).description('当前页数(starts with 1)'),
+    limit: Joi.number().integer().optional().default(10).description('每页条数'),
   }).concat(schema)
 }
 

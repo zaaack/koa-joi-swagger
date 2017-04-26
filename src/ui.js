@@ -1,5 +1,5 @@
 import send from 'koa-send'
-import swaggerUI from 'swagger-ui'
+import swaggerUI from 'swagger-ui/index' // fix ci
 
 import defaultUIHtml from './ui-html'
 

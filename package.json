@@ -1,0 +1,67 @@
+{
+  "name": "koa-joi-swaggre",
+  "version": "0.1.0",
+  "description": "An ES6 decorator + class based router, support inherit, override, priority, auto load controllers, etc.",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel -d ./lib -s false -D ./src && git add -A",
+    "test": "cross-env NODE_ENV=development DEBUG=koa-joi-swagger ava --serial",
+    "cover": "cross-env NODE_ENV=development nyc ava --serial"
+  },
+  "precommit": [
+    "build"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaaack/koa-joi-swagger.git"
+  },
+  "keywords": [
+    "koa",
+    "router",
+    "decorator",
+    "es6",
+    "es7",
+    "koa-router"
+  ],
+  "author": "zaaack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zaaack/koa-joi-swagger/issues"
+  },
+  "homepage": "https://github.com/zaaack/koa-joi-swagger#readme",
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "debug": "^2.6.3",
+    "joi": "^10.4.1",
+    "joi-to-json-schema": "^3.0.0",
+    "koa-send": "^3",
+    "path-to-regexp": "^1.7.0",
+    "swagger-ui": "^3.0.6"
+  },
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "babel-cli": "^6.24.0",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015-node6": "^0.4.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "cross-env": "^3.2.4",
+    "eslint": "^3.18.0",
+    "koa": "^2",
+    "koa-bodyparser": "3",
+    "koa-dec-router": "^0.0.2",
+    "nyc": "^10.2.0",
+    "pre-commit": "^1.2.2",
+    "supertest": "^3.0.0",
+    "get-port": "^3.1.0"
+  },
+  "ava": {
+    "files": [
+      "test/**/test.*.js",
+      "test/**/test.js"
+    ],
+    "require": "babel-register",
+    "babel": "inherit"
+  }
+}

@@ -1,0 +1,6 @@
+docs/
+yarn-error.log
+.nyc_output
+coverage
+.DS_Store
+node_modules

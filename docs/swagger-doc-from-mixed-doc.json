@@ -1,0 +1,96 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test API",
+    "description": "Test API",
+    "version": "1.0.0"
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "basePath": "/api/v1",
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/posts": {
+      "get": {
+        "summary": "Some posts",
+        "tags": [
+          "Post"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "allowEmptyValue": true,
+            "in": "query",
+            "enum": [
+              "news",
+              "article"
+            ],
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post list",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "lists": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "description": "Post title",
+                        "type": "string"
+                      },
+                      "content": {
+                        "description": "Post content",
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "patterns": [],
+                    "required": [
+                      "content"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "patterns": []
+            }
+          },
+          "default": {
+            "description": "Error happened",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false,
+                  "patterns": []
+                }
+              },
+              "additionalProperties": false,
+              "patterns": []
+            }
+          }
+        }
+      }
+    }
+  }
+}

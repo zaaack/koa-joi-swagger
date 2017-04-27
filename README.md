@@ -15,7 +15,7 @@
 ## Install
 
 ```sh
-npm i -g koa-joi-swagger
+npm i koa-joi-swagger
 
 ```
 
@@ -24,6 +24,18 @@ or
 ```sh
 yarn add koa-joi-swagger
 ```
+
+## Example
+
+```sh
+git clone https://github.com/zaaack/koa-joi-swagger.git
+cd koa-joi-swagger
+yarn # or npm i
+ALONE=1 babel-node ./test/fixtures/server.js
+```
+
+Now open <http://127.0.0.1:3456/swagger>!
+
 ## Demo
 
 app.js

@@ -5,6 +5,13 @@
 
 [![Build Status](https://travis-ci.org/zaaack/koa-joi-swagger.svg?branch=master)](https://travis-ci.org/zaaack/koa-joi-swagger) [![npm](https://img.shields.io/npm/v/koa-joi-swagger.svg)](https://www.npmjs.com/package/koa-joi-swagger) [![npm](https://img.shields.io/npm/dm/koa-joi-swagger.svg)](https://www.npmjs.com/package/koa-joi-swagger)
 
+## Feature
+
+* Router agnostic.
+* Using your favorite library for validation, and generate swagger document for develop.
+* Serving Swagger UI in your koa project.
+* ...
+
 ## Install
 
 ```sh
@@ -114,7 +121,7 @@ export default {
         },
         responses: {
           '200': {
-            description: 'Post list',
+            x: 'Post list',
             schema: Joi.object().keys({
               lists: Joi.array().items(Joi.object().keys({
                 title: Joi.string().description('Post title'),

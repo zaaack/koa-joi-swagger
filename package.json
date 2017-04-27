@@ -17,11 +17,10 @@
   },
   "keywords": [
     "koa",
-    "router",
-    "decorator",
-    "es6",
-    "es7",
-    "koa-router"
+    "joi",
+    "swagger",
+    "validation",
+    "api-docs"
   ],
   "author": "zaaack",
   "license": "MIT",

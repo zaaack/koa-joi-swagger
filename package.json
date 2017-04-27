@@ -1,6 +1,6 @@
 {
   "name": "koa-joi-swagger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An ES6 decorator + class based router, support inherit, override, priority, auto load controllers, etc.",
   "main": "lib/index.js",
   "scripts": {

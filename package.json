@@ -62,5 +62,8 @@
     ],
     "require": "babel-register",
     "babel": "inherit"
+  },
+  "optionalDependencies": {
+    "swagger-ui-dist": "^3.0.9"
   }
 }

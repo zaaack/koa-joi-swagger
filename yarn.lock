@@ -3721,6 +3721,10 @@ supports-color@^3.1.2:
   dependencies:
     has-flag "^1.0.0"
 
+swagger-ui-dist@^3.0.9:
+  version "3.0.9"
+  resolved "http://registry.npm.taobao.org/swagger-ui-dist/download/swagger-ui-dist-3.0.9.tgz#e04a70830a0facfef05cb3f6f4d8abe9ae4f3c48"
+
 swagger-ui@^2:
   version "2.2.10"
   resolved "http://registry.npm.taobao.org/swagger-ui/download/swagger-ui-2.2.10.tgz#b25e7a21664e5d90bf391db30db08de41e852d7b"

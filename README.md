@@ -25,13 +25,19 @@ or
 yarn add koa-joi-swagger
 ```
 
+for v3, install optional dependencies
+```sh
+npm i swagger-ui-dist # or yarn add swagger-ui-dist
+```
+
+
 ## Example
 
 ```sh
 git clone https://github.com/zaaack/koa-joi-swagger.git
 cd koa-joi-swagger
 yarn # or npm i
-ALONE=1 babel-node ./test/fixtures/server.js
+SERVE=1 babel-node ./test/fixtures/server.js
 ```
 
 Now open <http://127.0.0.1:3456/swagger>!
@@ -204,10 +210,12 @@ app.use(mixedValidate(mixedDoc, {
 
 app.use(ui(swaggerDoc, {
   pathRoot: '/swagger', // optional, swagger path
-  skipPaths = [], // optional, skip paths
-  UIHtml = defaultUIHtml, // optional, get ui html
-  swaggerConfig = '', // optional, something like, `{ <field>: <value>, .... }` to display in html for overriding swagger ui options.
-  sendConfig = { maxage: 3600 * 1000 * 24 * 30 }, // optional, config for koa-send, default maxage is 1 month.
+  skipPaths: [], // optional, skip paths
+  UIHtml: defaultUIHtml, // optional, get ui html
+  swaggerConfig: '', // optional, a json5 string, e.g. `{ <field>: <value>, .... }` to display in html for overriding swagger ui options.
+  sendConfig: { maxage: 3600 * 1000 * 24 * 30 }, // optional, config for koa-send, default maxage is 1 month.
+  v3: false, // optional, default is v2, you need to install optional dependencies `swagger-ui-dist` first.
+
 }))
 
 // joiValidate // the internal joi validation function used by mixedValidate, in case you need one.

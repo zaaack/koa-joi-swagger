@@ -14,7 +14,24 @@ app.use(bodyparser())
 
 const swaggerDoc = toSwaggerDoc(mixedDoc)
 // debug('swaggerDoc', JSON.stringify(swaggerDoc, null, 2))
-app.use(ui(swaggerDoc, {pathRoot: '/swagger'}))
+app.use(ui(swaggerDoc, {
+  pathRoot: '/swagger',
+  v3: process.env.V3 === '1',
+  // Temporary fix https://github.com/swagger-api/swagger-ui/issues/3045
+  swaggerConfig: `{
+    configUrl: '/swagger-config'
+  }`,
+}))
+
+app.use(async (ctx, next) => {
+  if (ctx.path === '/swagger-config') {
+    ctx.body = {
+      url: ctx.origin + '/swagger/api-docs'
+    }
+  } else {
+    await next()
+  }
+})
 
 app.use(async (ctx, next) => {
   try {
@@ -45,8 +62,12 @@ app.use(mixedValidate(mixedDoc, {
 app.use(decRouter.router.routes())
 app.use(decRouter.router.allowedMethods())
 
-if (process.env.ALONE === '1') {
-  app.listen(3456)
+if (process.env.SERVE === '1') {
+  const getPort = require('get-port')
+  getPort(3456).then(port => {
+    app.listen(port)
+    console.log(`Listen at http://127.0.0.1:${port}`)
+  })
 }
 
 export default app

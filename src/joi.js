@@ -7,7 +7,7 @@ let myJoi = Joi.extend({
     json: 'invalid json', // Used below as 'number.round'
   },
   coerce(value, state, options) {
-    if (this._flags.json &&
+    if (this._flags.json && value &&
         typeof value.toJSON === 'function') {
       return value.toJSON()
     }

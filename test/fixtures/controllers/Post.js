@@ -1,4 +1,4 @@
-import { controller, get, post } from 'koa-dec-router'
+import { controller, get, post, put } from 'koa-dec-router'
 import BaseCtrl from './Base'
 
 const posts = []
@@ -55,7 +55,7 @@ export default class PostCtrl extends BaseCtrl {
 
   @get('/:id')
   async get(ctx) {
-    console.log(ctx)
+    console.log('get', ctx)
     const { okMore, okMatch, errorMore } = ctx.query
     const { id } = ctx.params
     const post = posts.find(p => p.get('_id') === id)
@@ -77,6 +77,31 @@ export default class PostCtrl extends BaseCtrl {
     if (okMatch) {
       post.set('read_count', 'stringType')
     }
+    ctx.body = {
+      code: 0,
+      data: post.data,
+    }
+  }
+
+  @put('/:id')
+  async put(ctx) {
+    console.log('put', ctx)
+    const { errorMore } = ctx.query
+    const { id } = ctx.params
+    const post = posts.find(p => p.get('_id') === id)
+    if (!post) {
+      ctx.status = 404
+      ctx.body = {
+        code: 1,
+        message: 'not_found',
+        data: {},
+      }
+      if (errorMore) {
+        ctx.body.more_field = 'more_field'
+      }
+      return
+    }
+    Object.assign(post.data, ctx.body)
     ctx.body = {
       code: 0,
       data: post.data,

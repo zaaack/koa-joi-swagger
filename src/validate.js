@@ -114,9 +114,9 @@ export default function mixedValidate(document, opts = {}) {
   })
   function matchPath(si, ctx) {
     const path = ctx.path.replace(new RegExp(`^${document.basePath}`), '')
-    const match = path.match(si.pathRe) && (ctx.method.toLowerCase() in si.schema)
-    return match && si.keys.reduce((params, key, i) => {
-      params[key] = match[i + 1]
+    const match = path.match(si.pathRe)
+    return match && (ctx.method.toLowerCase() in si.schema) && si.keys.reduce((params, key, i) => {
+      params[key.name] = match[i + 1]
       return params
     }, {})
   }
@@ -125,11 +125,12 @@ export default function mixedValidate(document, opts = {}) {
     let pathParams
     let schemaInfo = schemaInfos.find(
       si => (pathParams = pathParams || matchPath(si, ctx)))
+    ctx.request.pathParams = pathParams;
     if (!schemaInfo) return next()
-    const key = schemaInfo.path
+    const method = ctx.method.toLowerCase()
+    const key = method + schemaInfo.path
     let validate = cache[key]
     if (!validate) {
-      const method = ctx.method.toLowerCase()
       debug('schemaInfo', method, schemaInfo.schema)
       const schema = schemaInfo.schema[method]
       const joiValidateSchema = {

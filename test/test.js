@@ -31,6 +31,11 @@ const notFound = {
   message: 'not_found',
 }
 
+async function createPost() {
+  let res = await agent.post('/api/v1/post/create').send({ entity: postCreate })
+  return res.body.data;
+}
+
 test.before(async () => {
   const port = await getPort(3457).then(port => {
     app.listen(port)
@@ -41,7 +46,6 @@ test.before(async () => {
 
 test('success', async t => {
   let res = await agent.get('/api/v1/posts').expect(200)
-  console.log(res.body)
   t.deepEqual(res.body, {
     'code': 0,
     'data': {
@@ -57,39 +61,39 @@ test('success', async t => {
      entity: postCreate,
    })
    .expect(200)
+  let createdPost = res.body.data;
 
   t.deepEqual(res.body, {
     code: 0,
     data: post,
   })
-
-  res = await agent.get('/api/v1/post/1').expect(200)
+  res = await agent.get(`/api/v1/post/${createdPost._id}`).expect(200)
   t.deepEqual(res.body, {
     code: 0,
-    data: post,
+    data: createdPost,
   })
 })
 
 test('error', async t => {
-  let res = await agent.get('/api/v1/post/2').expect(404)
-  console.log(res.body)
+  let res = await agent.get('/api/v1/post/666').expect(404)
   t.deepEqual(res.body, notFound)
 })
 
 test('remove more field', async t => {
+  let createdPost = await createPost();
   let res = await agent
-    .get('/api/v1/post/1')
+    .get(`/api/v1/post/${createdPost._id}`)
     .query({
       okMore: true,
     })
     .expect(200)
   t.deepEqual(res.body, {
     code: 0,
-    data: post,
+    data: createdPost,
   })
 
   res = await agent
-    .get('/api/v1/post/2')
+    .get('/api/v1/post/666')
     .query({
       failMore: true,
     })
@@ -98,21 +102,23 @@ test('remove more field', async t => {
 })
 
 test('error type', async t => {
+  let createdPost = await createPost();
   let res = await agent
-    .get('/api/v1/post/1')
+    .get(`/api/v1/post/${createdPost._id}`)
     .query({
       okMatch: true,
     })
     .expect(500)
+
   t.deepEqual(res.body, {
     code: 1,
     message: 'response.body:child "data" fails because [child "read_count" fails because ["read_count" must be a number]]',
     data: {
       code: 0,
       data: {
-        ...post,
+        ...createdPost,
         read_count: 'stringType',
-        more_field: 'more_field',
+        //more_field: 'more_field',
       },
     },
   })
@@ -138,4 +144,30 @@ test('request validation', async t => {
       },
     },
   })
+})
+
+
+test('do not cache different methods with same path', async t => {
+  let createdPost = await createPost();
+  let res = await agent.get(`/api/v1/post/${createdPost._id}`)
+    .expect(200)
+  t.deepEqual(res.body, {
+    code: 0,
+    data: createdPost,
+  })
+
+  res = await agent
+    .put(`/api/v1/post/${createdPost._id}`)
+    .expect(400)
+
+  t.deepEqual(res.body, {
+    code: 1,
+    data: {},
+    message: 'request.body:child "entity" fails because ["entity" is required]',
+  })
+})
+
+
+test('validate pathParams', async t => {
+  await agent.get(`/api/v1/post/test`).expect(400)
 })

@@ -1,6 +1,7 @@
 import { Err, pageQuery, api, page, pageApi } from './utils'
 
 import joiSwagger from '../../src'
+
 const { Joi } = joiSwagger
 import Debug from 'debug'
 
@@ -66,6 +67,27 @@ export default {
         },
       },
     },
+    put: {
+      summary: 'Edit post',
+      description: 'Edit post',
+      tags: ['Post'],
+      parameters: {
+        pathParams: pathId(),
+        body: Joi.object().keys({
+          entity: PostCreate.required(),
+        }),
+      },
+      responses: {
+        '200': {
+          description: '文章详情',
+          schema: api(Post),
+        },
+        'default': {
+          description: '出现错误(请求错误4xx)',
+          schema: Err,
+        },
+      },
+    },
   },
   '/post/create': {
     post: {
@@ -74,7 +96,7 @@ export default {
       tags: ['Post'],
       parameters: {
         body: Joi.object().keys({
-          entity: PostCreate,
+          entity: PostCreate.required(),
         }),
       },
       responses: {

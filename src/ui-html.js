@@ -4,7 +4,7 @@
  * Customized version of swagger-ui HTML.
  */
 
-export default (document, pathPrefix, moreConfig = '{}') => `
+export default (document, pathPrefix = '', moreConfig = '{}') => `
 
 <!DOCTYPE html>
 <html>

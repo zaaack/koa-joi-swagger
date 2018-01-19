@@ -26,7 +26,7 @@ const Post = PostLite.concat(Joi.object().json().keys({
 }))
 
 const pathId = (msg = 'path id') => Joi.object().keys({
-  id: Joi.string().required().description(msg),
+  id: Joi.number().integer().required().description(msg),
 })
 
 export default {

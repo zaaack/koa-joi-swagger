@@ -166,3 +166,8 @@ test('do not cache different methods with same path', async t => {
     message: 'request.body:child "entity" fails because ["entity" is required]',
   })
 })
+
+
+test('validate pathParams', async t => {
+  await agent.get(`/api/v1/post/test`).expect(400)
+})

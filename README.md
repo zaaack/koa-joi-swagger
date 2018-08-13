@@ -37,7 +37,7 @@ npm i swagger-ui-dist # or yarn add swagger-ui-dist
 git clone https://github.com/zaaack/koa-joi-swagger.git
 cd koa-joi-swagger
 yarn # or npm i
-SERVE=1 babel-node ./test/fixtures/server.js
+SERVE=1 npx babel-node ./test/fixtures/server.js
 ```
 
 Now open <http://127.0.0.1:3456/swagger>!
